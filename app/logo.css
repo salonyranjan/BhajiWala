@@ -1,0 +1,2 @@
+/* Keeps the custom SVG mark balanced beside the Bhajiwala wordmark. */
+.pb-logo{display:flex;align-items:center;gap:7px;white-space:nowrap}.pb-logo img{width:34px;height:34px;flex:0 0 auto}.pb-footer .pb-logo img{width:30px;height:30px}@media(max-width:760px){.pb-logo img{width:30px;height:30px}}

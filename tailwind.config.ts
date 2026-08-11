@@ -1,0 +1,2 @@
+import type { Config } from "tailwindcss";
+export default { content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"], theme: { extend: { colors: { cream: "#FFF7E7", ember: "#E86428", saffron: "#F8B84E", charcoal: "#201B18", cocoa: "#49352C" }, fontFamily: { display: ["Georgia", "serif"], body: ["Arial", "sans-serif"] }, boxShadow: { card: "0 18px 50px rgba(73,53,44,.12)" } } }, plugins: [] } satisfies Config;
