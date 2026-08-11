@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model MenuItem {
@@ -45,10 +46,10 @@ model Order {
 }
 
 model OrderItem {
-  id        String @id @default(cuid())
-  orderId   String
-  name      String
-  price     Int
-  quantity  Int
-  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  id       String @id @default(cuid())
+  orderId  String
+  name     String
+  price    Int
+  quantity Int
+  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
