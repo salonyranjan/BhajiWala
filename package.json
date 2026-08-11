@@ -8,7 +8,7 @@
     "dev": "next dev",
     "check": "tsc --noEmit",
     "build": "prisma generate && prisma migrate deploy && prisma db seed && next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p ${PORT:-10000}"
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
