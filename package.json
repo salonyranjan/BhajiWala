@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "next dev",
     "check": "tsc --noEmit",
-    "build": "prisma generate && next build",
-    "start": "prisma migrate deploy && prisma db seed && next start -p $PORT",
+    "build": "prisma generate && prisma migrate deploy && prisma db seed && next build",
+    "start": "next start -p $PORT",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
