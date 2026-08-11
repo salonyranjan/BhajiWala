@@ -1,6 +1,6 @@
 # Bhajiwala
 
-A mobile-first Pav Bhaji ordering experience for **Shri Krishna Science Centre, near Gandhi Maidan, Patna, Bihar**. Customers can place food orders, reserve tables, track orders, download bills, and chat with Bhaji Buddy in English or Hindi. Rajiv Ranjan manages live orders and reservations from a password-protected owner dashboard.
+A mobile-first Pav Bhaji ordering experience . Customers can place food orders, reserve tables, track orders, download bills, and chat with Bhaji Buddy in English or Hindi.owner manages live orders and reservations from a password-protected owner dashboard.
 
 ## What is included
 
