@@ -1,6 +1,6 @@
 # Bhajiwala
 
-A mobile-first Pav Bhaji ordering experience . Customers can place food orders, reserve tables, track orders, download bills, and chat with Bhaji Buddy in English or Hindi.owner manages live orders and reservations from a password-protected owner dashboard.
+A mobile-first Pav Bhaji ordering experience. Customers can place food orders, reserve tables, track orders, download bills, and chat with Bhaji Buddy in English or Hindi. The owner manages live orders and reservations from a password-protected owner dashboard.
 
 ## What is included
 
@@ -20,20 +20,20 @@ A mobile-first Pav Bhaji ordering experience . Customers can place food orders, 
 
 ```mermaid
 flowchart TD
-  C[Customer on mobile or desktop] --> W[Next.js Bhajiwala app]
-  O[Owner / Rajiv] --> A[/admin dashboard]
-  W -->|Place / track order| ORD[/api/orders]
-  W -->|Reserve a table| RES[/api/reservations]
-  W -->|English or Hindi support| BOT[/api/waiter]
-  A -->|View orders and reservations| ORD
+  C["Customer on mobile or desktop"] --> W["Next.js Bhajiwala app"]
+  O["Owner / Rajiv"] --> A["/admin dashboard"]
+  W -->|"Place / track order"| ORD["/api/orders"]
+  W -->|"Reserve a table"| RES["/api/reservations"]
+  W -->|"English or Hindi support"| BOT["/api/waiter"]
+  A -->|"View orders and reservations"| ORD
   A --> RES
-  ORD --> P[(PostgreSQL via Prisma)]
+  ORD --> P[("PostgreSQL via Prisma")]
   RES --> P
   BOT --> P
-  BOT --> G[Groq AI]
-  ORD -->|optional alert| E[Resend email]
-  RES -->|optional alert| E
-  H[/api/health] --> P
+  BOT --> G["Groq AI"]
+  ORD -->|"optional alert"| E["Resend email"]
+  RES -->|"optional alert"| E
+  H["/api/health"] --> P
 ```
 
 ## Tech stack
@@ -222,13 +222,13 @@ Railway runs this lifecycle automatically:
 
 ```mermaid
 flowchart LR
-  A[GitHub push] --> B[npm run build]
-  B --> C[prisma generate]
-  C --> D[next build]
-  D --> E[prisma migrate deploy]
-  E --> F[prisma db seed]
-  F --> G[next start]
-  G --> H[/api/health checks PostgreSQL]
+  A["GitHub push"] --> B["npm run build"]
+  B --> C["prisma generate"]
+  C --> D["next build"]
+  D --> E["prisma migrate deploy"]
+  E --> F["prisma db seed"]
+  F --> G["next start"]
+  G --> H["/api/health checks PostgreSQL"]
 ```
 
 `prisma db seed` uses upserts, so every restart safely refreshes the standard menu without creating duplicates. Once the service is healthy, Railway gives you a public URL; add a custom domain from the Railway service settings if desired.
@@ -241,7 +241,6 @@ flowchart LR
 | `npm run db:migrate:dev` | Create and apply a new migration locally |
 | `npm run db:migrate:deploy` | Apply committed migrations in a production environment |
 | `npm run db:seed` | Add or refresh the menu inventory |
-| `npm run check` | Verify TypeScript before committing or deploying |
 | `npm run check` | Verify TypeScript before committing or deploying |
 | `npm run build` | Run a production build locally |
 | `npm run start` | Run migrations, seed data, then serve production build |
