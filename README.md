@@ -1,22 +1,73 @@
-# Bhajiwala
+<div align="center">
 
-A mobile-first Pav Bhaji ordering experience. Customers can place food orders, reserve tables, track orders, download bills, and chat with Bhaji Buddy in English or Hindi. The owner manages live orders and reservations from a password-protected owner dashboard.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:F55036,100:FFB199&height=220&section=header&text=Bhajiwala&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Mobile-first%20Pav%20Bhaji%20ordering,%20powered%20by%20AI&descAlignY=58&descSize=18" width="100%" alt="Bhajiwala banner"/>
 
-## What is included
+# 🍛 Bhajiwala
 
-- Responsive food menu with search, cart, quantity controls, and cash-on-delivery checkout
-- Accurate menu pricing, bulk-order messaging, and delivery inside Science Centre
-- Printable one-page bill / PDF export from the customer order confirmation
-- Customer order tracker and one-tap reorder
-- Table reservations visible in the owner dashboard
-- Owner dashboard for order status: New → Accepted → Cooking → Ready → Out for delivery → Delivered
-- English/Hindi Bhaji Buddy customer support chat, powered by Groq when configured
-- Kitchen email alerts for orders and reservations through Resend (optional)
-- PostgreSQL persistence with Prisma migrations and automatic menu seeding
-- Railway deployment configuration and database-aware health check
-- Branded SVG logo, browser icon, and installable PWA manifest
+### A mobile-first Pav Bhaji ordering experience — built for real kitchens, real customers.
 
-## Architecture
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prisma-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Groq](https://img.shields.io/badge/AI-Groq_Powered-F55036?style=for-the-badge&logo=data:image/svg+xml;base64,)](https://groq.com/)
+[![Render](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://bhajiwala.onrender.com)
+[![License](https://img.shields.io/badge/License-Private-lightgrey?style=for-the-badge)](#license)
+
+**Order. Track. Reserve. Chat — in English or Hindi.**
+
+### 🔗 [Live App → bhajiwala.onrender.com](https://bhajiwala.onrender.com)
+
+[Features](#-what-is-included) • [Architecture](#-architecture) • [Tech Stack](#-tech-stack) • [Setup](#-run-locally) • [Deploy](#-deploy-to-render) • [API](#-api-overview)
+
+</div>
+
+---
+
+## 📖 Overview
+
+Bhajiwala is a full-stack, production-ready food ordering platform built for a Pav Bhaji stall. Customers browse the menu, place cash-on-delivery orders, reserve tables, track order status in real time, and chat with **Bhaji Buddy** — a bilingual AI assistant. The owner runs the entire operation from a single password-protected dashboard, with optional email alerts landing straight in the kitchen inbox.
+
+> Built to solve a real problem for a real small business — not a demo app.
+
+---
+
+## 📸 Preview
+
+<div align="center">
+
+| Customer Menu | Order Tracker | Owner Dashboard |
+|:---:|:---:|:---:|
+| <img src="./public/screenshots/menu.png" width="260" alt="Customer menu and cart"/> | <img src="./public/screenshots/tracker.png" width="260" alt="Order tracking screen"/> | <img src="./public/screenshots/admin.png" width="260" alt="Owner admin dashboard"/> |
+
+| Table Reservation | Bhaji Buddy Chat | Bill / Receipt |
+|:---:|:---:|:---:|
+| <img src="./public/screenshots/reservation.png" width="260" alt="Table reservation form"/> | <img src="./public/screenshots/chat.png" width="260" alt="Bilingual AI chat assistant"/> | <img src="./public/screenshots/bill.png" width="260" alt="Printable order bill"/> |
+
+</div>
+
+> 🖼️ Add real screenshots to `public/screenshots/` and update the paths above — this is the single highest-impact thing you can do to make this README convert for freelance clients. Aim for actual phone-width captures (375–430px) so the mobile-first design shows.
+
+---
+
+## ✨ What is included
+
+| | Feature |
+|---|---|
+| 🛒 | Responsive food menu with search, cart, quantity controls, and cash-on-delivery checkout |
+| 💰 | Accurate menu pricing, bulk-order messaging, and delivery inside Science Centre |
+| 🧾 | Printable one-page bill / PDF export from the customer order confirmation |
+| 📦 | Customer order tracker and one-tap reorder |
+| 🪑 | Table reservations visible in the owner dashboard |
+| 👨‍🍳 | Owner dashboard for order status: `New → Accepted → Cooking → Ready → Out for delivery → Delivered` |
+| 🤖 | English/Hindi **Bhaji Buddy** customer support chat, powered by Groq when configured |
+| 📧 | Kitchen email alerts for orders and reservations through Resend (optional) |
+| 🗄️ | PostgreSQL persistence with Prisma migrations and automatic menu seeding |
+| 🚀 | Render deployment configuration and database-aware health check |
+| 🎨 | Branded SVG logo, browser icon, and installable PWA manifest |
+
+---
+
+## 🏗️ Architecture
 
 ```mermaid
 flowchart TD
@@ -36,7 +87,9 @@ flowchart TD
   H["/api/health"] --> P
 ```
 
-## Tech stack
+---
+
+## 🧰 Tech stack
 
 | Area | Used technology |
 | --- | --- |
@@ -46,9 +99,11 @@ flowchart TD
 | Validation | Zod |
 | AI assistant | Vercel AI SDK + Groq |
 | Email alerts | Resend REST API |
-| Deployment | Railway + Railway PostgreSQL |
+| Deployment | Render + Supabase PostgreSQL |
 
-## Project map
+---
+
+## 🗂️ Project map
 
 ```text
 app/
@@ -58,7 +113,7 @@ app/
   api/reservations/        Create and list reservations
   api/waiter/              Bhaji Buddy bilingual support
   api/recommendations/     AI menu recommendations
-  api/health/              Railway database health check
+  api/health/              Render database health check
 components/
   adda-experience.tsx      Customer menu, cart, tracker, bill, chat, reservation UI
 lib/
@@ -69,100 +124,109 @@ prisma/
   migrations/              Versioned production schema migrations
   seed.ts                  Idempotent menu seed data
 public/logo.svg            Bhajiwala brand mark
-railway.toml               Railway build, start, and health-check settings
+render.yaml                Render build, start, and health-check settings
 ```
 
-## Requirements
+---
+
+## ⚙️ Requirements
 
 - Node.js 20 or newer
 - npm
-- A PostgreSQL database for local development or Railway deployment
+- A PostgreSQL database for local development or production (this project uses [Supabase](https://supabase.com/) in production)
 
-## Environment variables
+---
+
+## 🔐 Environment variables
 
 Copy the example file first:
 
 ```bash
-copy .env.example .env
+cp .env.example .env
 ```
 
-On macOS/Linux, use `cp .env.example .env` instead.
+*(On Windows, use `copy .env.example .env` instead.)*
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `DATABASE_URL` | Yes | PostgreSQL connection string used by Prisma |
-| `ADMIN_PASSWORD` | Yes | Password required to view the owner dashboard data |
-| `GROQ_API_KEY` | Recommended | Enables Bhaji Buddy and AI recommendations |
-| `RESEND_API_KEY` | Optional | Enables email notifications |
-| `ORDER_NOTIFICATION_EMAIL` | Optional | Rajiv's notification inbox |
-| `ORDER_FROM_EMAIL` | Optional | Verified Resend sender, e.g. `Bhajiwala <orders@example.com>` |
+| `DATABASE_URL` | ✅ Yes | Pooled PostgreSQL connection string used by Prisma at runtime (e.g. Supabase's PgBouncer connection, port `6543`) |
+| `DIRECT_URL` | ✅ Yes | Direct (non-pooled) PostgreSQL connection used by Prisma for migrations (e.g. Supabase, port `5432`) |
+| `ADMIN_PASSWORD` | ✅ Yes | Password required to view the owner dashboard data |
+| `GROQ_API_KEY` | 🟡 Recommended | Enables Bhaji Buddy and AI recommendations |
+| `RESEND_API_KEY` | ⚪ Optional | Enables email notifications |
+| `ORDER_NOTIFICATION_EMAIL` | ⚪ Optional | Kitchen notification inbox |
+| `ORDER_FROM_EMAIL` | ⚪ Optional | Verified Resend sender, e.g. `Bhajiwala <orders@example.com>` |
 
-Example local database URL:
+Example `.env`:
 
-```env
-DATABASE_URL="postgresql://postgres:your_password@localhost:5432/bhajiwala?schema=public"
-ADMIN_PASSWORD="use-a-long-unique-password"
+```dotenv
+DATABASE_URL=""
+DIRECT_URL=""
+GROQ_API_KEY="replace-with-a-new-key"
+ADMIN_PASSWORD="change-this-before-deployment"
+RESEND_API_KEY=""
+ORDER_NOTIFICATION_EMAIL=""
+ORDER_FROM_EMAIL="Bhajiwala <orders@your-verified-domain.com>"
 ```
 
-### Quick local PostgreSQL with Docker (optional)
+> ℹ️ When using Supabase, `DATABASE_URL` should point to the **pooled** connection (PgBouncer, port `6543`, with `?pgbouncer=true`) and `DIRECT_URL` should point to the **direct** connection (port `5432`) so `prisma migrate` can run outside the pooler.
 
-If Docker Desktop is installed, this starts a local PostgreSQL database without a separate database installation:
+### 🐳 Quick local PostgreSQL with Docker (optional)
+
+If Docker Desktop is installed, this starts a local PostgreSQL database without a separate installation:
 
 ```bash
 docker run --name bhajiwala-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=your_password -e POSTGRES_DB=bhajiwala -p 5432:5432 -d postgres:16
 ```
 
-Use the example `DATABASE_URL` above with the same password. To stop it later, run `docker stop bhajiwala-postgres`; to start it again, run `docker start bhajiwala-postgres`.
+Use the example `DATABASE_URL` above with the same password.
+To stop it later: `docker stop bhajiwala-postgres` — to start it again: `docker start bhajiwala-postgres`.
 
-Never commit `.env`. It is already ignored by Git.
+> ⚠️ Never commit `.env`. It is already ignored by Git.
 
-## Run locally
+---
 
-1. Install dependencies.
+## 🚀 Run locally
 
-   ```bash
-   npm install
-   ```
+```bash
+# 1. Install dependencies
+npm install
 
-2. Create `.env` and set a working local PostgreSQL `DATABASE_URL` plus `ADMIN_PASSWORD`.
+# 2. Create .env and set DATABASE_URL + ADMIN_PASSWORD
 
-3. Generate Prisma Client and create the database tables.
+# 3. Generate Prisma Client and create database tables
+npm run db:generate
+npm run db:migrate:dev
 
-   ```bash
-   npm run db:generate
-   npm run db:migrate:dev
-   ```
+# 4. Seed the standard menu inventory
+npm run db:seed
 
-4. Add the standard menu inventory.
+# 5. Start the app
+npm run dev
+```
 
-   ```bash
-   npm run db:seed
-   ```
+Open **[http://localhost:3000](http://localhost:3000)** — the customer app lives at `/`, the owner dashboard at `/admin`.
 
-5. Start the app.
+---
 
-   ```bash
-   npm run dev
-   ```
+## 👨‍🍳 Daily owner workflow
 
-Open [http://localhost:3000](http://localhost:3000). The customer app is at `/`; the owner dashboard is at `/admin`.
+1. Open `/admin` and enter `ADMIN_PASSWORD`
+2. Review new orders and reservations
+3. Update order status as food moves through preparation and delivery
+4. Customers check status live using their order code + phone number
+5. If Resend is configured, every order and reservation also arrives by email
 
-## Daily owner workflow
+> 💵 Orders are paid on delivery — the app does not collect online payments.
 
-1. Open `/admin` and enter `ADMIN_PASSWORD`.
-2. Review new orders and reservations.
-3. Update the order status as food moves through preparation and delivery.
-4. Customers can check that status with their order code and phone number.
-5. If Resend is configured, each order and reservation also arrives by email.
+---
 
-Orders are paid to Rajiv at delivery. The app does not collect online payments.
-
-## API overview
+## 🔌 API overview
 
 | Endpoint | Method | Use |
 | --- | --- | --- |
 | `/api/orders` | `POST` | Creates a validated customer order and optional email alert |
-| `/api/orders` | `GET` | Tracks an order for the supplied order suffix and phone number; owner view requires password header |
+| `/api/orders` | `GET` | Tracks an order by order suffix + phone number; owner view requires password header |
 | `/api/orders` | `PATCH` | Changes an order status; owner password required |
 | `/api/reservations` | `POST` | Saves a table reservation and optional email alert |
 | `/api/reservations` | `GET` | Lists reservations; owner password required |
@@ -170,103 +234,124 @@ Orders are paid to Rajiv at delivery. The app does not collect online payments.
 | `/api/recommendations` | `POST` | Returns menu suggestions for a craving |
 | `/api/health` | `GET` | Returns `200` only when PostgreSQL is reachable |
 
-## Deploy to Railway
+---
+
+## 🚀 Deploy to Render
+
+**Live at: [bhajiwala.onrender.com](https://bhajiwala.onrender.com)**
 
 ### 1. Push the project to GitHub
-
-Create a new GitHub repository, then run these commands from the project folder:
 
 ```bash
 git init
 git add .
-git commit -m "Prepare Bhajiwala for Railway"
+git commit -m "Prepare Bhajiwala for Render"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 git push -u origin main
 ```
 
-Do not add `.env` or `prisma/dev.db`; they are intentionally ignored.
+*(`.env` and `prisma/dev.db` are intentionally ignored — do not add them.)*
 
-### 2. Create Railway services
+### 2. Provision the database
 
-1. In Railway, create a **New Project** and choose **Deploy from GitHub Repo**.
-2. Select this repository. Railway detects `railway.toml` automatically.
-3. In the same project, click **New** → **Database** → **Add PostgreSQL**.
+This project uses **[Supabase](https://supabase.com/)** for managed PostgreSQL:
 
-### 3. Add app variables
+1. Create a new Supabase project
+2. From **Project Settings → Database**, copy the **connection pooling** string (port `6543`) for `DATABASE_URL` and the **direct** connection string (port `5432`) for `DIRECT_URL`
 
-Open the **web app service** → **Variables**. If the database service is called `Postgres`, paste this exact value:
+### 3. Create the Render web service
 
-```env
-DATABASE_URL=${{Postgres.DATABASE_URL}}
+1. In Render, click **New** → **Web Service** and connect this GitHub repository
+2. Set the runtime to **Node**
+3. **Build Command:**
+   ```bash
+   npm install && npm run build
+   ```
+4. **Start Command:**
+   ```bash
+   npm run start
+   ```
+5. **Health Check Path:** `/api/health`
+
+### 4. Add environment variables
+
+Under the web service's **Environment** tab, add:
+
+```dotenv
+DATABASE_URL=""
+DIRECT_URL=""
+GROQ_API_KEY="your-groq-api-key"
+ADMIN_PASSWORD="use-a-long-unique-owner-password"
+RESEND_API_KEY=""
+ORDER_NOTIFICATION_EMAIL=""
+ORDER_FROM_EMAIL="Bhajiwala <orders@your-verified-domain.com>"
 ```
 
-If your database service has a different name, replace `Postgres` with that exact service name. Then add:
+`RESEND_API_KEY`, `ORDER_NOTIFICATION_EMAIL`, and `ORDER_FROM_EMAIL` are optional — leave them blank to skip email alerts.
 
-```env
-ADMIN_PASSWORD=use-a-long-unique-owner-password
-GROQ_API_KEY=your-groq-api-key
-```
-
-For kitchen email alerts, add:
-
-```env
-RESEND_API_KEY=your-resend-api-key
-ORDER_NOTIFICATION_EMAIL=rajivs-inbox@example.com
-ORDER_FROM_EMAIL=Bhajiwala <orders@your-verified-domain.com>
-```
-
-### 4. Deploy
-
-Railway runs this lifecycle automatically:
+### 5. Deploy
 
 ```mermaid
 flowchart LR
-  A["GitHub push"] --> B["npm run build"]
-  B --> C["prisma generate"]
-  C --> D["next build"]
-  D --> E["prisma migrate deploy"]
-  E --> F["prisma db seed"]
-  F --> G["next start"]
-  G --> H["/api/health checks PostgreSQL"]
+  A["GitHub push"] --> B["Render build: npm install"]
+  B --> C["npm run build"]
+  C --> D["prisma generate"]
+  D --> E["next build"]
+  E --> F["Render start: npm run start"]
+  F --> G["prisma migrate deploy"]
+  G --> H["prisma db seed"]
+  H --> I["next start"]
+  I --> J["/api/health checks Supabase"]
 ```
 
-`prisma db seed` uses upserts, so every restart safely refreshes the standard menu without creating duplicates. Once the service is healthy, Railway gives you a public URL; add a custom domain from the Railway service settings if desired.
+`prisma db seed` uses upserts, so every restart safely refreshes the menu without creating duplicates. Render auto-deploys on every push to `main`; add a custom domain from the Render service settings if desired.
 
-## Database commands
+---
+
+## 🗃️ Database commands
 
 | Command | When to use it |
 | --- | --- |
 | `npm run db:generate` | After changing `schema.prisma` |
 | `npm run db:migrate:dev` | Create and apply a new migration locally |
-| `npm run db:migrate:deploy` | Apply committed migrations in a production environment |
+| `npm run db:migrate:deploy` | Apply committed migrations in production |
 | `npm run db:seed` | Add or refresh the menu inventory |
 | `npm run check` | Verify TypeScript before committing or deploying |
 | `npm run build` | Run a production build locally |
 | `npm run start` | Run migrations, seed data, then serve production build |
 
-### Important migration note
+### ⚠️ Important migration note
 
-The old local `prisma/dev.db` SQLite database is not migrated automatically to PostgreSQL. Railway starts with the seeded menu. If you must preserve old local orders or reservations, export them before replacing the local database setup and import them into PostgreSQL deliberately.
+The old local `prisma/dev.db` SQLite database is **not** migrated automatically to PostgreSQL. Render/Supabase starts with the seeded menu. If you need to preserve old local orders or reservations, export them before switching and import into PostgreSQL deliberately.
 
-## Troubleshooting
+---
+
+## 🛠️ Troubleshooting
 
 | Problem | What to check |
 | --- | --- |
-| Railway health check fails | Confirm `DATABASE_URL` is a Railway variable reference and the PostgreSQL service is running. |
-| Owner dashboard rejects password | Set `ADMIN_PASSWORD` in the web service variables, redeploy, then enter that exact password at `/admin`. |
-| No order emails | Check all three Resend variables and verify the sender domain in Resend. Orders still save when email is not configured. |
-| Bhaji Buddy does not answer | Add a valid `GROQ_API_KEY`. Core ordering and reservations work without it. |
-| Prisma cannot connect locally | Start PostgreSQL and confirm the local `DATABASE_URL` database name, port, user, and password. |
-| Menu is missing after deployment | Confirm startup completed; run `npm run db:seed` in the Railway service shell if needed. |
+| Render health check fails | Confirm `DATABASE_URL` / `DIRECT_URL` are set correctly and the Supabase project is active |
+| Owner dashboard rejects password | Set `ADMIN_PASSWORD` in the Render Environment tab, redeploy, enter that exact password at `/admin` |
+| No order emails | Check all three Resend variables and verify the sender domain in Resend — orders still save without email |
+| Bhaji Buddy does not answer | Add a valid `GROQ_API_KEY` — core ordering and reservations work without it |
+| Prisma cannot connect locally | Start PostgreSQL and confirm database name, port, user, and password |
+| PgBouncer / migration conflicts | Make sure `DATABASE_URL` (pooled, port `6543`) is used at runtime and `DIRECT_URL` (port `5432`) is used only for `prisma migrate` |
+| Menu is missing after deployment | Confirm the build completed; run `npm run db:seed` from the Render shell if needed |
 
-## Security notes
+---
 
-- Use a long, unique `ADMIN_PASSWORD`; do not use a phone number or a common word.
-- Keep API keys only in Railway Variables or `.env`, never in source code.
-- Rotate keys immediately if they are shared publicly.
-- The owner dashboard validates the password on every protected API request.
+## 🔒 Security notes
 
-## License
+- Use a long, unique `ADMIN_PASSWORD` — never a phone number or common word
+- Keep API keys only in Render's Environment tab or `.env`, never in source code
+- Rotate keys immediately if they are ever shared or exposed publicly
+- The owner dashboard validates the password on every protected API request
 
-Private project for Bhajiwala.
+---
+
+<div align="center">
+
+**Built with ❤️ and a lot of Pav Bhaji**
+
+</div>
