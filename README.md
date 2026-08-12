@@ -25,7 +25,7 @@
 
 ## 📖 Overview
 
-Bhajiwala is a full-stack, production-ready food ordering platform built for a Pav Bhaji stall. Customers browse the menu, place cash-on-delivery orders, reserve tables, track order status in real time, and chat with **Bhaji Buddy** — a bilingual AI assistant. The owner runs the entire operation from a single password-protected dashboard, with optional email alerts landing straight in the kitchen inbox.
+Bhajiwala is a full-stack, production-ready food ordering platform . Customers browse the menu, place cash-on-delivery orders, reserve tables, track order status in real time, and chat with **Bhaji Buddy** — a bilingual AI assistant. The owner runs the entire operation from a single password-protected dashboard, with optional email alerts landing straight in the kitchen inbox.
 
 > Built to solve a real problem for a real small business — not a demo app.
 
