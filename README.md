@@ -1,23 +1,23 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:F55036,100:FFB199&height=220&section=header&text=Bhajiwala&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Mobile-first%20Pav%20Bhaji%20ordering,%20powered%20by%20AI&descAlignY=58&descSize=18" width="100%" alt="Bhajiwala banner"/>
+<img src="./public/screenshots/hero-banner.png" width="100%" style="max-width:900px; border-radius:12px;" alt="Bhajiwala banner"/>
 
-# 🍛 Bhajiwala
+<br/>
 
-### A mobile-first Pav Bhaji ordering experience — built for real kitchens, real customers.
+<img src="./public/screenshots/hero.png" width="100%" style="max-width:900px; border-radius:12px; margin-top:12px;" alt="Bhajiwala hero screenshot"/>
+
+<br/><br/>
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prisma-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Groq](https://img.shields.io/badge/AI-Groq_Powered-F55036?style=for-the-badge&logo=data:image/svg+xml;base64,)](https://groq.com/)
 [![Render](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://bhajiwala.onrender.com)
-[![License](https://img.shields.io/badge/License-Private-lightgrey?style=for-the-badge)](#license)
+
 
 **Order. Track. Reserve. Chat — in English or Hindi.**
 
 ### 🔗 [Live App → bhajiwala.onrender.com](https://bhajiwala.onrender.com)
-
-[Features](#-what-is-included) • [Architecture](#-architecture) • [Tech Stack](#-tech-stack) • [Setup](#-run-locally) • [Deploy](#-deploy-to-render) • [API](#-api-overview)
 
 </div>
 
@@ -35,19 +35,44 @@ Bhajiwala is a full-stack, production-ready food ordering platform built for a P
 
 <div align="center">
 
-| Customer Menu | Order Tracker | Owner Dashboard |
-|:---:|:---:|:---:|
-| <img src="./public/screenshots/menu.png" width="260" alt="Customer menu and cart"/> | <img src="./public/screenshots/tracker.png" width="260" alt="Order tracking screen"/> | <img src="./public/screenshots/admin.png" width="260" alt="Owner admin dashboard"/> |
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <b>Owner Dashboard — Reservations</b><br/><br/>
+      <img src="./public/screenshots/admin.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Owner dashboard showing today's orders, sales, and table reservations"/>
+    </td>
+    <td align="center" width="50%">
+      <b>Owner Dashboard — Live Orders</b><br/><br/>
+      <img src="./public/screenshots/orders.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Live order cards with status buttons"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <b>Bhaji Buddy Chat</b><br/><br/>
+      <img src="./public/screenshots/chat.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Bilingual AI chat assistant answering menu questions"/>
+    </td>
+    <td align="center" width="50%">
+      <b>Order Tracker</b><br/><br/>
+      <img src="./public/screenshots/tracker.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Order tracking form by order number and phone"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <b>Table Reservation</b><br/><br/>
+      <img src="./public/screenshots/reservation.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Table reservation form with name, phone, date, time, and guests"/>
+    </td>
+    <td align="center" width="50%">
+      <b>Printable Bill</b><br/><br/>
+      <img src="./public/screenshots/bill.png" width="400" height="260" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Printable bill and order confirmation modal"/>
+    </td>
+  </tr>
+</table>
 
-| Table Reservation | Bhaji Buddy Chat | Bill / Receipt |
-|:---:|:---:|:---:|
-| <img src="./public/screenshots/reservation.png" width="260" alt="Table reservation form"/> | <img src="./public/screenshots/chat.png" width="260" alt="Bilingual AI chat assistant"/> | <img src="./public/screenshots/bill.png" width="260" alt="Printable order bill"/> |
+<br/>
+
+<img src="./public/screenshots/menu.png" width="820" height="480" style="object-fit:cover; border-radius:10px; border:1px solid #333;" alt="Customer menu grid with search, categories, and add-to-cart"/>
 
 </div>
-
-> 🖼️ Add real screenshots to `public/screenshots/` and update the paths above — this is the single highest-impact thing you can do to make this README convert for freelance clients. Aim for actual phone-width captures (375–430px) so the mobile-first design shows.
-
----
 
 ## ✨ What is included
 
@@ -350,8 +375,3 @@ The old local `prisma/dev.db` SQLite database is **not** migrated automatically 
 
 ---
 
-<div align="center">
-
-**Built with ❤️ and a lot of Pav Bhaji**
-
-</div>
