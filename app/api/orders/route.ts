@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { sendOperationalEmail } from "@/lib/email";
+import { isAdminRequest } from "@/lib/admin-auth";
 import { z } from "zod";
 
 const orderSchema = z.object({
@@ -39,13 +40,13 @@ export async function GET(request: Request) {
     if (!order) return Response.json({ error: "Order not found. Please check your order number and phone." }, { status: 404 });
     return Response.json({ order });
   }
-  if (request.headers.get("x-admin-password") !== process.env.ADMIN_PASSWORD) return Response.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminRequest(request)) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const orders = await prisma.order.findMany({ include: { items: true }, orderBy: { createdAt: "desc" } });
   return Response.json({ orders });
 }
 
 export async function PATCH(request: Request) {
-  if (request.headers.get("x-admin-password") !== process.env.ADMIN_PASSWORD) return Response.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminRequest(request)) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const parsed = z.object({ id: z.string().min(1), status: z.enum(["NEW", "ACCEPTED", "COOKING", "READY", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED"]) }).safeParse(await request.json());
   if (!parsed.success) return Response.json({ error: "Invalid order update." }, { status: 400 });
   const order = await prisma.order.update({ where: { id: parsed.data.id }, data: { status: parsed.data.status } });

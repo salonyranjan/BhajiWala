@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { sendOperationalEmail } from "@/lib/email";
+import { isAdminRequest } from "@/lib/admin-auth";
 import { z } from "zod";
 const schema = z.object({ name:z.string().min(2), phone:z.string().min(8), date:z.string().regex(/^\d{4}-\d{2}-\d{2}$/), timeSlot:z.string().min(1), partySize:z.coerce.number().int().min(1).max(20) });
 async function emailReservation(reservation: { id: string; name: string; phone: string; date: Date; timeSlot: string; partySize: number }) { const text = `NEW TABLE RESERVATION\n\nGuest: ${reservation.name}\nPhone: ${reservation.phone}\nDate: ${reservation.date.toLocaleDateString("en-IN")}\nTime: ${reservation.timeSlot}\nParty size: ${reservation.partySize}\n\nReservation ID: #${reservation.id.slice(-6).toUpperCase()}`; return sendOperationalEmail({ subject: `New table reservation - ${reservation.name}`, text, idempotencyKey: `bhajiwala-reservation-${reservation.id}` }); }
 export async function POST(request: Request) { const parsed=schema.safeParse(await request.json()); if(!parsed.success) return Response.json({error:"Please check the reservation details."},{status:400}); const data=parsed.data; const reservation=await prisma.reservation.create({data:{...data,date:new Date(`${data.date}T00:00:00`)}}); const emailNotification = await emailReservation(reservation); return Response.json({reservation,emailNotificationSent:emailNotification.sent,emailNotificationError:emailNotification.sent ? undefined : emailNotification.reason},{status:201}); }
 
-export async function GET(request: Request) { if (request.headers.get("x-admin-password") !== process.env.ADMIN_PASSWORD) return Response.json({ error: "Unauthorized" }, { status: 401 }); const reservations = await prisma.reservation.findMany({ orderBy: [{ date: "asc" }, { timeSlot: "asc" }] }); return Response.json({ reservations }); }
+export async function GET(request: Request) { if (!isAdminRequest(request)) return Response.json({ error: "Unauthorized" }, { status: 401 }); const reservations = await prisma.reservation.findMany({ orderBy: [{ date: "asc" }, { timeSlot: "asc" }] }); return Response.json({ reservations }); }
