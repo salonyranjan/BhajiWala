@@ -17,7 +17,13 @@
 
 **Order. Track. Reserve. Chat — in English or Hindi.**
 
+> 💼 **Demo of a recent freelance project** — designed and built end-to-end for a real food ordering client, from ordering flow to deployment.
+
+> ℹ️ The business name, address, menu, and other details shown inside the app are fictional/demo data used to showcase the project — not real client information.
+
 ### 🔗 [Live App → bhajiwala.onrender.com](https://bhajiwala.onrender.com)
+
+[Features](#-what-is-included) • [Architecture](#-architecture) • [Tech Stack](#-tech-stack) • [Setup](#-run-locally) • [Deploy](#-deploy-to-render) • [API](#-api-overview)
 
 </div>
 
@@ -25,7 +31,7 @@
 
 ## 📖 Overview
 
-Bhajiwala is a full-stack, production-ready food ordering platform . Customers browse the menu, place cash-on-delivery orders, reserve tables, track order status in real time, and chat with **Bhaji Buddy** — a bilingual AI assistant. The owner runs the entire operation from a single password-protected dashboard, with optional email alerts landing straight in the kitchen inbox.
+Bhajiwala is a full-stack, production-ready food ordering app. Customers browse the menu, place cash-on-delivery orders, reserve tables, track order status in real time, and chat with **Bhaji Buddy** — a bilingual AI assistant. The owner runs the entire operation from a single password-protected dashboard, with optional email alerts landing straight in the kitchen inbox.
 
 > Built to solve a real problem for a real small business — not a demo app.
 
@@ -374,4 +380,3 @@ The old local `prisma/dev.db` SQLite database is **not** migrated automatically 
 - The owner dashboard validates the password on every protected API request
 
 ---
-
