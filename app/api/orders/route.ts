@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { sendOperationalEmail } from "@/lib/email";
 import { z } from "zod";
 
 const orderSchema = z.object({
@@ -10,18 +11,9 @@ const orderSchema = z.object({
 });
 
 async function emailKitchenOrder(order: { id: string; customerName: string; phone: string; location: string; notes: string | null; total: number; items: { name: string; quantity: number; price: number }[] }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const recipient = process.env.ORDER_NOTIFICATION_EMAIL;
-  const sender = process.env.ORDER_FROM_EMAIL;
-  if (!apiKey || !recipient || !sender) return false;
   const itemLines = order.items.map(item => `- ${item.quantity} x ${item.name} (Rs. ${item.price * item.quantity})`).join("\n");
   const message = `NEW BHAJIWALA ORDER #${order.id.slice(-6).toUpperCase()}\n\nCustomer: ${order.customerName}\nPhone: ${order.phone}\nLocation: ${order.location}\n\nItems:\n${itemLines}\n\nTotal: Rs. ${order.total}\nPayment: Cash on delivery to Rajiv Ranjan${order.notes ? `\nNote: ${order.notes}` : ""}`;
-  try {
-    const response = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: sender, to: [recipient], subject: `New Bhajiwala order #${order.id.slice(-6).toUpperCase()}`, text: message, headers: { "Idempotency-Key": `bhajiwala-order-${order.id}` } }) });
-    return response.ok;
-  } catch {
-    return false;
-  }
+  return sendOperationalEmail({ subject: `New Bhajiwala order #${order.id.slice(-6).toUpperCase()}`, text: message, idempotencyKey: `bhajiwala-order-${order.id}` });
 }
 
 export async function POST(request: Request) {
@@ -30,16 +22,20 @@ export async function POST(request: Request) {
   const data = parsed.data;
   const total = data.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const order = await prisma.order.create({ data: { customerName: data.customerName, phone: data.phone, location: data.location, notes: data.notes || null, total, items: { create: data.items } }, include: { items: true } });
-  const emailNotificationSent = await emailKitchenOrder(order);
-  return Response.json({ order, emailNotificationSent }, { status: 201 });
+  const emailNotification = await emailKitchenOrder(order);
+  return Response.json({ order, emailNotificationSent: emailNotification.sent, emailNotificationError: emailNotification.sent ? undefined : emailNotification.reason }, { status: 201 });
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   const phone = searchParams.get("phone");
-  if (id && phone) {
-    const order = await prisma.order.findFirst({ where: { id: { endsWith: id }, phone }, select: { id: true, status: true, total: true, createdAt: true, items: { select: { name: true, price: true, quantity: true } } } });
+  if (id || phone) {
+    const orderCode = id?.trim().toLowerCase() ?? "";
+    const normalizedPhone = phone?.replace(/\D/g, "") ?? "";
+    if (!/^[a-z0-9]{6}$/.test(orderCode) || normalizedPhone.length < 8 || normalizedPhone.length > 20) return Response.json({ error: "Enter the 6-character order number and the phone number used for the order." }, { status: 400 });
+    const matchingOrders = await prisma.order.findMany({ where: { id: { endsWith: orderCode } }, select: { id: true, phone: true, status: true, total: true, createdAt: true, items: { select: { name: true, price: true, quantity: true } } }, take: 5 });
+    const order = matchingOrders.find(candidate => candidate.phone.replace(/\D/g, "") === normalizedPhone);
     if (!order) return Response.json({ error: "Order not found. Please check your order number and phone." }, { status: 404 });
     return Response.json({ order });
   }
