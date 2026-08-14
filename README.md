@@ -101,7 +101,7 @@ Bhajiwala is a full-stack, production-ready food ordering app. Customers browse 
 ```mermaid
 flowchart TD
   C["Customer on mobile or desktop"] --> W["Next.js Bhajiwala app"]
-  O["Owner / Rajiv"] --> A["/admin dashboard"]
+  O["Owner"] --> A["/admin dashboard"]
   W -->|"Place / track order"| ORD["/api/orders"]
   W -->|"Reserve a table"| RES["/api/reservations"]
   W -->|"English or Hindi support"| BOT["/api/waiter"]
