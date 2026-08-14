@@ -15,8 +15,6 @@
 [![Render](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://bhajiwala.onrender.com)
 
 
-**Order. Track. Reserve. Chat — in English or Hindi.**
-
 > 💼 **Demo of a recent freelance project** — designed and built end-to-end for a real food ordering client, from ordering flow to deployment.
 
 > ℹ️ The business name, address, menu, and other details shown inside the app are fictional/demo data used to showcase the project — not real client information.
