@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Bhajiwala - Pav Bhaji Delivery",
     short_name: "Bhajiwala",
-    description: "Order fresh Pav Bhaji inside Shri Krishna Science Centre, Patna.",
+    description: "Order fresh Pav Bhaji inside Shri Krishna Science Centre, Pune.",
     start_url: "/",
     display: "standalone",
     background_color: "#f5f0e5",
